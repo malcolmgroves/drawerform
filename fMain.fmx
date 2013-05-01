@@ -1,0 +1,68 @@
+object frmMain: TfrmMain
+  Left = 0
+  Top = 0
+  Caption = 'Form2'
+  ClientHeight = 460
+  ClientWidth = 320
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Orientations = [soPortrait, soLandscape, soInvertedPortrait, soInvertedLandscape]
+  FormFactor.Devices = [dkDesktop]
+  OnResize = FormResize
+  DesignerMobile = True
+  DesignerWidth = 320
+  DesignerHeight = 480
+  DesignerDeviceName = 'iPhone'
+  DesignerOrientation = 0
+  object lytDrawer: TLayout
+    Height = 460.000000000000000000
+    Width = 217.000000000000000000
+  end
+  object lytMain: TLayout
+    Height = 460.000000000000000000
+    Position.X = 104.000000000000000000
+    Width = 216.000000000000000000
+    object ToolBar1: TToolBar
+      Touch.GestureManager = GestureManager1
+      Height = 44.000000000000000000
+      TabOrder = 0
+      Width = 216.000000000000000000
+      object btnDrawer: TButton
+        Action = actOpenDrawer
+        Height = 31.000000000000000000
+        Position.X = 8.000000000000000000
+        Position.Y = 6.000000000000000000
+        StyleLookup = 'detailstoolbuttonbordered'
+        TabOrder = 0
+        Trimming = ttCharacter
+        Width = 35.000000000000000000
+      end
+    end
+  end
+  object ActionList1: TActionList
+    Left = 168
+    Top = 360
+    object actOpenDrawer: TAction
+      Text = 'actOpenDrawer'
+      OnExecute = actOpenDrawerExecute
+      OnUpdate = actOpenDrawerUpdate
+    end
+  end
+  object GestureManager1: TGestureManager
+    Left = 168
+    Top = 296
+    GestureData = <
+      item
+        Control = ToolBar1
+        Collection = <
+          item
+            Action = actOpenDrawer
+            GestureID = sgiLeft
+          end
+          item
+            Action = actOpenDrawer
+            GestureID = sgiRight
+          end>
+      end>
+  end
+end

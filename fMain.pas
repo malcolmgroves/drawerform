@@ -36,6 +36,12 @@ var
 
 implementation
 uses
+  {$IFDEF IOS}
+  iOSapi.UIKit,
+  {$ENDIF }
+  {$IFDEF ANDROID}
+  FMX.Platform.Android, Androidapi.JNI.GraphicsContentViewText,
+  {$ENDIF }
   FMX.Platform;
 
 {$R *.fmx}
@@ -61,14 +67,14 @@ begin
 end;
 
 function TfrmMain.IsPad: boolean;
-var
-  DeviceService : IFMXDeviceService;
 begin
-  DeviceService := IFMXDeviceService(TPlatformServices.Current.GetPlatformService(IFMXDeviceService));
-  if not Assigned(DeviceService) then
-    Result := False
-  else
-    Result := Uppercase(DeviceService.GetModel).Contains('IPAD');
+{$IFDEF IOS}
+  Result := TUIDevice.Wrap(TUIDevice.OCClass.currentDevice).userInterfaceIdiom = UIUserInterfaceIdiomPad;
+{$ENDIF}
+{$IFDEF ANDROID}
+  Result := (MainActivity.getResources.getConfiguration.screenLayout and TJConfiguration.JavaClass.SCREENLAYOUT_SIZE_MASK)
+    >= TJConfiguration.JavaClass.SCREENLAYOUT_SIZE_LARGE;
+{$ENDIF}
 end;
 
 procedure TfrmMain.LayoutForm;
